@@ -468,8 +468,10 @@ def main(argv):
     raise app.UsageError('Too many command-line arguments.')
 
 
-  builder = tfds.builder(FLAGS.dataset, data_dir=FLAGS.data_dir)
-  builder.download_and_prepare()
+  #builder = tfds.builder(FLAGS.dataset, data_dir=FLAGS.data_dir)
+  #builder.download_and_prepare()
+  builder = tfds.builder_from_directory('/Users/ima029/Desktop/SCAMPI/Repository/data/zip scrapings (huge)/data1/')
+
   num_train_examples = builder.info.splits[FLAGS.train_split].num_examples
   #num_eval_examples = builder.info.splits[FLAGS.eval_split].num_examples
   num_classes = builder.info.features['label'].num_classes
