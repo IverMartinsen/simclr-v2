@@ -471,18 +471,18 @@ def main(argv):
   builder = tfds.builder(FLAGS.dataset, data_dir=FLAGS.data_dir)
   builder.download_and_prepare()
   num_train_examples = builder.info.splits[FLAGS.train_split].num_examples
-  num_eval_examples = builder.info.splits[FLAGS.eval_split].num_examples
+  #num_eval_examples = builder.info.splits[FLAGS.eval_split].num_examples
   num_classes = builder.info.features['label'].num_classes
 
   train_steps = model_lib.get_train_steps(num_train_examples)
-  eval_steps = FLAGS.eval_steps or int(
-      math.ceil(num_eval_examples / FLAGS.eval_batch_size))
+  #eval_steps = FLAGS.eval_steps or int(
+  #    math.ceil(num_eval_examples / FLAGS.eval_batch_size))
   epoch_steps = int(round(num_train_examples / FLAGS.train_batch_size))
 
   logging.info('# train examples: %d', num_train_examples)
   logging.info('# train_steps: %d', train_steps)
-  logging.info('# eval examples: %d', num_eval_examples)
-  logging.info('# eval steps: %d', eval_steps)
+  #logging.info('# eval examples: %d', num_eval_examples)
+  #logging.info('# eval steps: %d', eval_steps)
 
   checkpoint_steps = (
       FLAGS.checkpoint_steps or (FLAGS.checkpoint_epochs * epoch_steps))
