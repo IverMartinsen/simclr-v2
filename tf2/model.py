@@ -276,5 +276,9 @@ class Model(tf.keras.models.Model):
       supervised_head_outputs = self.supervised_head(
           tf.stop_gradient(supervised_head_inputs), training)
       return projection_head_outputs, supervised_head_outputs
+    ####
+    elif FLAGS.train_mode == 'linear_evaluation':
+      return hiddens, None
+    ####
     else:
       return projection_head_outputs, None
