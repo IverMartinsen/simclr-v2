@@ -466,7 +466,9 @@ def _restore_latest_or_from_pretrain(checkpoint_manager):
 def main(argv):
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
-
+  #print out all the flags
+  with open(FLAGS.model_dir + '_flags.txt', 'w') as f:
+    f.write(str(FLAGS))
 
   #builder = tfds.builder(FLAGS.dataset, data_dir=FLAGS.data_dir)
   #builder.download_and_prepare()
@@ -525,6 +527,7 @@ def main(argv):
     summary_writer = tf.summary.create_file_writer(FLAGS.model_dir)
     with strategy.scope():
       # Build input pipeline.
+
       ds = data_lib.build_distributed_dataset(builder, FLAGS.train_batch_size,
                                               True, strategy, topology)
 
